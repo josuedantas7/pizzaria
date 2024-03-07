@@ -8,11 +8,9 @@ export async function POST(request: Request){
 
     const session = await getServerSession(authOptions)
 
-
     if (!session || !session.user){
         return NextResponse.json({error: "You must be logged in to create a category"}, {status: 401})
     }
-
 
     const { name } = await request.json()
 
@@ -20,11 +18,11 @@ export async function POST(request: Request){
         return NextResponse.json({error: "All fields are required"}, {status: 400})
     }
 
-
     try {
         const category = await prisma.category.create({
             data: {
                 name,
+                ownerId: session.user.id,
             }
         })
         return NextResponse.json(category, {status: 201})
