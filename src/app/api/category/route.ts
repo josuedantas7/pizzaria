@@ -30,3 +30,19 @@ export async function POST(request: Request){
         return NextResponse.json({error: "An error occurred while creating the category"}, {status: 500})
     }
 }
+
+export async function GET(){
+    const session = await getServerSession(authOptions)
+
+    if (!session || !session.user){
+        return NextResponse.json({error: "You must be logged in to create a category"}, {status: 401})
+    }
+
+    const categories = await prisma.category.findMany({
+        where: {
+            ownerId: session.user.id
+        }
+    })
+
+    return NextResponse.json(categories, {status: 200})
+}
