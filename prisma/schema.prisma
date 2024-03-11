@@ -14,16 +14,16 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  id             String     @id @default(auto()) @map("_id") @db.ObjectId
   name           String?
-  email          String?   @unique
+  email          String?    @unique
   hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
   accounts       Account[]
-  role           String?   @default("user")
-  Product       Product[]
-  Category      Category[]
+  role           String?    @default("user")
+  Product        Product[]
+  Category       Category[]
 }
 
 model Product {
@@ -55,7 +55,7 @@ model Table {
   idTable   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Orders    Order?
+  Order     Order?
 }
 
 model Order {
@@ -74,8 +74,8 @@ model OrderProduct {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Product   Product  @relation(fields: [productId], references: [id])
-  Order     Order    @relation(fields: [orderId], references: [id])
-  orderId   String   @db.ObjectId
+  Order     Order?   @relation(fields: [orderId], references: [id])
+  orderId   String?  @db.ObjectId
 }
 
 model Account {
