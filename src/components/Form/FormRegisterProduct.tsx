@@ -21,13 +21,17 @@ export function FormRegisterProduct() {
     async function handleRegisterProduct(e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) {
       e.preventDefault()
       setLoading(true)
+
+      if (!name || !categoryId || !price || !description) return Notification('error', 'Preencha todos os campos')
+
+      const data : ProductProps = {
+        name,
+        categoryId,
+        price: parseFloat(price),
+        description
+      }
+
       try{
-        const data : ProductProps = {
-          name,
-          categoryId,
-          price: parseFloat(price),
-          description
-        }
         await api.post('/api/product', {...data})
         Notification('success', 'Produto cadastrado com sucesso')
       }catch{

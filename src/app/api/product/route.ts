@@ -42,16 +42,18 @@ export async function GET(request: Request){
         return NextResponse.json({error: "You must be logged in to view products"}, {status: 401})
     }
 
-    const { categoryId } = await request.json()
+    const { searchParams } = new URL(request.url)
 
-    if (!categoryId){
+    const idCategory = searchParams.get('idCategory')
+
+    if (!idCategory){
         return NextResponse.json({error: "All fields are required"}, {status: 400})
     }
 
     try {
         const products = await prisma.product.findMany({
             where: {
-                categoryId,
+                categoryId: idCategory,
                 ownerId: session.user.id
             }
         })
