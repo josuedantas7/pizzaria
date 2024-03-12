@@ -24,6 +24,7 @@ export async function POST(request: Request){
 
         const orderExists = await prisma.order.findFirst({
             where: {
+                ownerId: session.user.id,
                 tableId: tableId,
             }
         })
@@ -31,6 +32,7 @@ export async function POST(request: Request){
         if (orderExists) {
             const order = await prisma.order.update({
                 where: {
+                    ownerId: session.user.id,
                     id: orderExists.id
                 },
                 data: {
@@ -45,6 +47,7 @@ export async function POST(request: Request){
         } else {
             const order = await prisma.order.create({
                 data: {
+                    ownerId: session.user.id,
                     tableId: tableId,
                     OrderProduct: {
                         connect: {
