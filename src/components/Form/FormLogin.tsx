@@ -58,8 +58,8 @@ export function FormLogin() {
 
   return (
     <form onSubmit={handleSubmit} className='w-[500px] flex flex-col gap-3'>
-        <InputPrimary onChange={setEmail} placeholder='Digite seu E-mail' type='email' />
-        <InputPrimary onChange={setPassword} placeholder='Sua senha' type='password' />
+        <InputPrimary value={email} onChange={setEmail} placeholder='Digite seu E-mail' type='email' />
+        <InputPrimary value={password} onChange={setPassword} placeholder='Sua senha' type='password' />
         <Button onClick={handleSubmit} variant={'destructive'} className='w-full'>Acessar</Button>
         <Link href={'/cadastro'} className='text-end text-zinc-300 underline'>Registrar minha empresa</Link>
     </form>
