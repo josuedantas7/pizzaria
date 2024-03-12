@@ -45,20 +45,17 @@ export function FormRegister() {
         try{
             const response = await api.post('/api/user', {...data})
             Notification('success','Usuário criado com sucesso')
-            console.log(response.data)
             router.push('/login')
         }catch{
             Notification('error','Erro ao criar usuário')
         }
-
-        console.log(data)
     }
 
   return (
     <form className='w-[500px] flex flex-col gap-3' onSubmit={handleSubmit}>
-        <InputPrimary onChange={setName} placeholder='Digite o nome da sua empresa' type='text' />
-        <InputPrimary onChange={setEmail} placeholder='Digite seu E-mail' type='email' />
-        <InputPrimary onChange={setPassword} placeholder='Sua senha' type='password' />
+        <InputPrimary value={name} onChange={setName} placeholder='Digite o nome da sua empresa' type='text' />
+        <InputPrimary value={email} onChange={setEmail} placeholder='Digite seu E-mail' type='email' />
+        <InputPrimary value={password} onChange={setPassword} placeholder='Sua senha' type='password' />
         <Button onClick={handleSubmit} variant={'destructive'} className='w-full'>Acessar</Button>
         <Link href={"/login"} className='text-end text-zinc-300 underline'>Já possuo uma conta</Link>
     </form>

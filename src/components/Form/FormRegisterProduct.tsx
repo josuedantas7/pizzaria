@@ -53,7 +53,6 @@ export function FormRegisterProduct() {
         async function getCategories(){
             const response = await api.get('/api/category')
             setAllCategories(response.data)
-            console.log(response.data)
         }
         getCategories()
     },[])

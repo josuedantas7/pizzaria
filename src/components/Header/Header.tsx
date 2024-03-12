@@ -16,11 +16,11 @@ export default async function Header() {
     return (
         <div className="flex justify-between items-center px-20">
             <Link className="hover:scale-110 duration-500 transition-all" href={'/'}>
-                <Image src={logo} alt='logo' width={150} height={70} />
+                <Image src={logo} alt='Logo pizzaria' width={150} height={70} />
             </Link>
             <div className="flex gap-6 items-center py-4">
                 <Link className="hover:scale-110 duration-500 hover:text-zinc-300 hover:border-b transition-all border-emerald-100" href={'/nova-categoria'}>Nova categoria</Link>
-                <Link className="hover:scale-110 duration-500 hover:text-zinc-300 hover:border-b transition-all border-emerald-100" href={'/pedidos'}>Cardápio</Link>
+                <Link className="hover:scale-110 duration-500 hover:text-zinc-300 hover:border-b transition-all border-emerald-100" href={'/pedidos'}>Pedidos</Link>
                 {session && session.user ? (
                     <LinkHeaderSignOut/>
                 ): (

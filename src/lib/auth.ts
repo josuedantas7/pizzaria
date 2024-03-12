@@ -21,10 +21,6 @@ export const authOptions : NextAuthOptions = {
             },
             async authorize(credentials, req) : Promise<any>{
 
-
-                console.log("Authorize method", credentials)
-
-
                 if(!credentials?.email || !credentials?.password) throw new Error("Dados de Login necessarios")
 
                 const user = await prisma.user.findUnique({
@@ -32,8 +28,6 @@ export const authOptions : NextAuthOptions = {
                         email: credentials?.email
                     }
                 })
-
-                console.log("USER", user)
 
                 if(!user || !user.hashedPassword) {
                     throw new Error("Usuários não registrado através de credenciais")
